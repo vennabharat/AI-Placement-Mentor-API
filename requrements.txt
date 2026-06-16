@@ -1,0 +1,12 @@
+- numpy
+- pandas
+- scikit-learn
+- fastapi
+- pydantic BaseModel
+- google genai
+- dotenv load_dotenv
+- os
+- train_test_split
+- DecisionTreeClassifier
+- accuracy_score
+- classification_report

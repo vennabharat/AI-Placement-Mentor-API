@@ -1,39 +1,43 @@
-Student,Aptitude,Communication,Coding
-Asha,78,82,80
-Rahul,65,60,55
-Kiran,88,90,95
-Meena,92,88,90
-Vijay,70,75,65
-Priya,85,91,87
-Arun,60,55,50
-Divya,95,93,98
-Student_01,78,82,85
-Student_02,65,70,68
-Student_03,92,88,95
-Student_04,55,60,58
-Student_05,81,79,83
-Student_06,73,75,70
-Student_07,88,90,91
-Student_08,62,67,64
-Student_09,95,92,97
-Student_10,58,55,61
-Student_11,84,80,86
-Student_12,69,72,71
-Student_13,91,89,93
-Student_14,60,65,63
-Student_15,76,78,74
-Student_16,87,85,89
-Student_17,53,58,55
-Student_18,80,82,79
-Student_19,72,74,76
-Student_20,94,96,92
-Student_21,66,68,69
-Student_22,89,87,90
-Student_23,57,59,56
-Student_24,83,81,84
-Student_25,71,73,72
-Student_26,96,94,98
-Student_27,61,64,62
-Student_28,85,83,87
-Student_29,74,76,75
-Student_30,90,91,88
+Student,Aptitude,Communication,Coding,Total,Average,Placement_Status
+Asha,78,82,80,240.0,80.0,Eligible
+Rahul,65,60,55,180.0,60.0,Needs Improvement
+Kiran,88,90,95,273.0,91.0,Eligible
+Meena,92,88,90,270.0,90.0,Eligible
+Vijay,70,75,65,210.0,70.0,Needs Improvement
+Priya,85,91,87,263.0,87.67,Eligible
+Arun,60,55,50,165.0,55.0,Needs Improvement
+Divya,95,93,98,286.0,95.33,Eligible
+Student_01,78,82,85,245.0,81.67,Eligible
+Student_02,65,70,68,203.0,67.67,Needs Improvement
+Student_03,92,88,95,275.0,91.67,Eligible
+Student_04,55,60,58,173.0,57.67,Needs Improvement
+Student_05,81,79,83,243.0,81.0,Eligible
+Student_06,73,75,70,218.0,72.67,Needs Improvement
+Student_07,88,90,91,269.0,89.67,Eligible
+Student_08,62,67,64,193.0,64.33,Needs Improvement
+Student_09,95,92,97,284.0,94.67,Eligible
+Student_10,58,55,61,174.0,58.0,Needs Improvement
+Student_11,84,80,86,250.0,83.33,Eligible
+Student_12,69,72,71,212.0,70.67,Needs Improvement
+Student_13,91,89,93,273.0,91.0,Eligible
+Student_14,60,65,63,188.0,62.67,Needs Improvement
+Student_15,76,78,74,228.0,76.0,Eligible
+Student_16,87,85,89,261.0,87.0,Eligible
+Student_17,53,58,55,166.0,55.33,Needs Improvement
+Student_18,80,82,79,241.0,80.33,Eligible
+Student_19,72,74,76,222.0,74.0,Needs Improvement
+Student_20,94,96,92,282.0,94.0,Eligible
+Student_21,66,68,69,203.0,67.67,Needs Improvement
+Student_22,89,87,90,266.0,88.67,Eligible
+Student_23,57,59,56,172.0,57.33,Needs Improvement
+Student_24,83,81,84,248.0,82.67,Eligible
+Student_25,71,73,72,216.0,72.0,Needs Improvement
+Student_26,96,94,98,288.0,96.0,Eligible
+Student_27,61,64,62,187.0,62.33,Needs Improvement
+Student_28,85,83,87,255.0,85.0,Eligible
+Student_29,74,76,75,225.0,75.0,Needs Improvement
+Student_30,90,91,88,269.0,89.67,Eligible
+student_31,90,80,93,263.0,87.67,Eligible
+student_32,85,88,89,262.0,87.33,Eligible
+student_33,85,88,79,252.0,84.0,Eligible
+student_34,55,60,50,165.0,55.0,Needs Improvement

@@ -1,24 +1,69 @@
-from pydantic import BaseModel #import BaseModel from pydantic_core
-from fastapi import FastAPI # import FastAPI from fastapi
+from fastapi import FastAPI 
+from pydantic import BaseModel
+from evaluation import evaluate # custom library
+from prediction_model import pre_model  # custom library
+from google import genai
+from dotenv import load_dotenv
+import os
+import numpy as np
+import pandas as pd
 
-import pandas as pd #import pandas as pd
+load_dotenv()
 
-app = FastAPI() # create an instance of FastAPI
+api_key = os.getenv("GEMINI_API_KEY")
+
+app = FastAPI()
+
+data = pd.DataFrame()
+
+student_data = pd.read_csv("student_data.csv")
+
+client = genai.Client(api_key=api_key)
 
 class Student(BaseModel):
-    Student: str
-    Aptitude: int
-    Communication: int
-    Coding: int
+    name: str
+    aptitude: int 
+    communication: int 
+    coding: int 
 
-@app.post("/add_student/") # define a POST endpoint to add a student
-def add_student(student: Student):
-    students = pd.read_csv("student_placement_analysis.csv") # read the existing student data from a csv file
-    new_student = pd.DataFrame([student.model_dump()]) # create a new DataFrame for the new student
-    new_student["id"] = len(students) + 1 # assign a new id to the new student
-    new_student["Total"] = new_student["Aptitude"] + new_student["Communication"] + new_student["Coding"] # calculate the total score for the new student
-    new_student["Average"] = new_student["Total"] / 3 # calculate the average score for the new student
-    new_student["Placement_Status"] = any # determine the placement status based on average score
-    students.loc[len(students)] = new_student.iloc[0] # add the new student to the existing DataFrame
-    students.to_csv("student_placement_analysis.csv", index=False) # save the updated student data back to the csv file
-    return {"message": "Student added successfully"} # return a success message
+@app.post("/new_student")
+def new_student(new_student: Student):
+    total, average = evaluate(new_student.aptitude, new_student.communication, new_student.coding)
+    student = pd.DataFrame([
+        {
+            "Student" : new_student.name, 
+            "Aptitude" : new_student.aptitude,
+            "Communication" : new_student.communication,
+            "Coding" : new_student.coding, 
+            "Total" : round(total, 2),
+            "Average" : round(average, 2), 
+            "Placement_Status" : pre_model(
+                new_student.aptitude, 
+                new_student.communication,
+                new_student.coding
+            )[0]
+        }
+    ])
+
+    student_data.loc[len(student_data)] = student.iloc[0]   #Adding new student to database
+    student_data.to_csv("student_data.csv", index=False)
+    
+    response = client.models.generate_content(
+        model="gemini-2.5-flash", 
+        contents=f"""
+            Your a placement mentor, analyse student score in each subject and suggest
+            practical & acheivable solution.
+            Aptitude: {new_student.aptitude}
+            Communication: {new_student.communication}
+            Coding: {new_student.coding}
+        """
+    )
+    
+    return {
+        "Student Name" : new_student.name, 
+        "Aptitude" : new_student.aptitude, 
+        "Communication" : new_student.communication, 
+        "Coding" : new_student.coding, 
+        "Placement_Status" : student["Placement_Status"],
+        "Mentor advice" : response.text
+    }
