@@ -23,10 +23,12 @@ accuracy = accuracy_score(y_test, y_pred) # calculating the accuracy of the mode
 
 report = classification_report(y_test, y_pred) # generating a classification report
 
-print("\nModel Accuracy:", accuracy) # printing the accuracy of the model
+#print("\nModel Accuracy:", accuracy) # printing the accuracy of the model
 
-print("\nClassification Report:\n", report) # printing the classification report
+#print("\nClassification Report:\n", report) # printing the classification report
 
-prediction = model.predict(students[:-1,:])
+prediction = model.predict(students.loc[len(students)-1:len(students), ["Aptitude", "Communication", "Coding"]].values)
 
 print(prediction)
+
+#students.loc[len(students)-1:len(students), ["Aptitude", "Communication", "Coding"]].values
