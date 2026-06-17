@@ -1,3 +1,5 @@
+# used for securing api key
+# this file restricts github from uploading .env file to repository
 .env
 __pycache__/
 *.pyc

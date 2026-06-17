@@ -1,6 +1,7 @@
-import numpy as np
+import numpy as np  # importing numarical python for array operations
 
-def evaluate(aptitude: int, communication: int, coding: int):   # Function for calculation total & average
+# Function for calculating total & average from student scores
+def evaluate(aptitude: int, communication: int, coding: int):   
     total = aptitude + communication + coding
     average = total/3
     return np.array([total, average])

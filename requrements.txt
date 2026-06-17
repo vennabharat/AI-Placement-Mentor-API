@@ -1,3 +1,6 @@
+# the following dependencies are required for running this program successfully
+# use virtual environmet for installing all the dependencies
+# use uvicorn to run program locally
 - numpy
 - pandas
 - scikit-learn
