@@ -7,6 +7,7 @@ from dotenv import load_dotenv  # dot env fot securing API key
 import os
 import numpy as np  # numerical python for array operations
 import pandas as pd # pandas for data operations
+import json
 
 load_dotenv()   # loading dot env for calling secured API key
 
@@ -25,6 +26,12 @@ class Student(BaseModel):   # new class as datatype for passing values to endpoi
     aptitude: int 
     communication: int 
     coding: int 
+    
+class Evaluation(BaseModel):    # new class as datatype for parsing json file from LLM response
+    strengths: list[str]
+    weakness: list[str]
+    placement_readiness: str
+    recommendation: str
 
 # endpoint for creating new student & LLM advice
 @app.post("/new_student")
@@ -64,14 +71,26 @@ def new_student(new_student: Student):
             Aptitude: {new_student.aptitude}
             Communication: {new_student.communication}
             Coding: {new_student.coding}
-        """
+        """, 
+        # configuring model response 
+        config={
+            "response_mime_type": "application/json", 
+            "response_schema": Evaluation
+        }
     )
+    
+    data = Evaluation.model_validate_json(response.text)
+    
     # returning required student data
     return {
         "Student Name" : new_student.name, 
         "Aptitude" : new_student.aptitude, 
         "Communication" : new_student.communication, 
         "Coding" : new_student.coding, 
-        "Placement_Status" : student["Placement_Status"],
-        "Mentor advice" : response.text
+        "Placement Status" : student["Placement_Status"],
+        "Placement readiness": data.placement_readiness, 
+        "Strengths" : data.strengths, 
+        "Weakness" : data.weakness, 
+        "Mentor advice" : data.recommendation
     }
+    
