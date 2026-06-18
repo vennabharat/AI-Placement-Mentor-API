@@ -93,4 +93,25 @@ def new_student(new_student: Student):
         "Weakness" : data.weakness, 
         "Mentor advice" : data.recommendation
     }
+
+@app.post("/placement_help")
+def placement_help(question: str):
     
+    with open("placement_notes.txt", "r") as file:
+        context = file.read()
+    
+    prompt = f"""
+    You're a placement mentor. Use the following infromation to provide guidence.
+    
+    Notes: {context}
+    
+    Question: {question}
+    """
+    
+    response = client.models.generate_content(
+        model="gemini-2.5-flash", 
+        contents=prompt
+    )    
+    return {
+        response.text
+    }
